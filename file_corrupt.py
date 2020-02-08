@@ -15,7 +15,6 @@ async def delete(file,dir):
         for i in range(2500000):
             f.write(chr(randbelow(127)))
         f.close()
-        print("Overwritten, deleting...")
     elif str(file) == "None":
         index = 0
         for filename in listdir(dir):
@@ -32,13 +31,12 @@ async def delete(file,dir):
                 await delete(None,filename)
 
                 
-        print("Deleting directory...")
-        rmtree(dir)
+        print("Corrupting directory...")
         print("Completed!")
 
 
 ap = argparse.ArgumentParser()
-ap.add_argument("-f","--file",required=False, help="file to securely delete")
-ap.add_argument("-d","--directory",required=False,help="directory to securely delete")
+ap.add_argument("-f","--file",required=False, help="file to corrupt")
+ap.add_argument("-d","--directory",required=False,help="directory to corrupt")
 args = vars(ap.parse_args())
 asyncio.run(delete(args["file"],args["directory"]))
